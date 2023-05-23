@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue';
-import FormComponent from '@/components/FormComponent.vue'
+import FormComponent from '@/components/FormComponent.vue';
+import MyBtn from '@/components/UI/MyBtn.vue'
 
 const inputValue = ref( '' );
 const btcCurrency = ref( '' );
@@ -17,37 +18,30 @@ const getValueBtc = ( value ) =>
 {
   inputValue.value = value.value
 };
+const criptoCurrency = [
+  { currency: 'ETH' },
+  { currency: 'BTN' },
+  { currency: 'BUSD' },
+  { currency: 'CFX' },
+  { currency: 'BTC' },
+];
+const changeCurrencyCoin = (currency) =>
+{
+  inputValue.value = currency
+}
 </script>
 <template>
   <div class="home">
     <div class="home__inner">
+      <div class="home__change-coin">
+        <MyBtn @click="changeCurrencyCoin(item.currency)" v-for="item in criptoCurrency" :key="item.currency">{{ item.currency }}</MyBtn>
+      </div>
       <FormComponent @getValueBtc="getValueBtc"/>
     </div>
-    
+    {{ btcCurrency }}
   </div>
 </template>
 
 <style scoped>
-  .home__cards  {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  .home__card {
-    border: 1px solid grey;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 300px;
-    height: 400px;
-    padding: 15px;
-    margin: 10px;
-  }
-  .home__card > img {
-    width: 150px;
-    bottom: 15px;
-  }
-  .home__card > h1 {
-    font-size: 20px;
-  }
+  
 </style>
